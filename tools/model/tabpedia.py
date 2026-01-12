@@ -324,13 +324,14 @@ class TabPedia(BaseModel):
 
 
         # decoder outputs consists of (dec_features, layer_state, dec_hidden, dec_attn)
+        use_cache_final = use_cache and past_key_values is not None
         outputs = self.llm(
             input_ids=None if inputs_embeds is not None else input_ids,
             attention_mask=attention_mask,
             position_ids=position_ids,
             past_key_values=past_key_values,
             inputs_embeds=inputs_embeds,
-            use_cache=use_cache,
+            use_cache=use_cache_final,
             output_attentions=output_attentions,
             output_hidden_states=output_hidden_states,
             return_dict=return_dict,
